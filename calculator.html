@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Simple Web Calculator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="calc.css" />
+  <script src="calc.js" defer></script>
+</head>
+<style>
+ body {
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #000000; /* black background */
+}
+
+.calculator-container {
+    max-width: 340px; 
+    width: 90%; 
+    background-color: #000000;
+    padding: 1.5rem; 
+    border-radius: 0.75rem; 
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+    border: 1px solid #111111;
+}
+
+.calculator-container h1 {
+    font-size: 1.875rem;
+    font-weight: 800; 
+    text-align: center; 
+    margin-bottom: 1.5rem; 
+    color: #e879f9; /* pink/purple */
+}
+
+#display {
+    width: 100%; 
+    height: 4rem; 
+    text-align: right;
+    font-size: 2.25rem; 
+    font-weight: 700; 
+    background-color: #1f1f1f; 
+    color: #ffffff;
+    border-radius: 0.5rem; 
+    padding: 1rem; 
+    border: 1px solid #333;
+    outline: none;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.75rem;
+}
+
+.calculator-button {
+    font-weight: 600; 
+    padding-top: 0.75rem; 
+    padding-bottom: 0.75rem; 
+    border-radius: 0.5rem;
+    font-size: 1.5rem; 
+    outline: none; 
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out, box-shadow 0.2s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.calculator-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+}
+
+.calculator-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.operator-button {
+    background-color: #00bcd4; /* cyan */
+    color: #ffffff;
+}
+
+.operator-button:hover {
+    background-color: #00acc1;
+}
+
+.operator-button:focus {
+    box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #00bcd4;
+}
+
+.equals-button {
+    background-color: #d946ef; /* pink/purple */
+    color: #ffffff;
+}
+
+.equals-button:hover {
+    background-color: #c026d3;
+}
+
+.equals-button:focus {
+    box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #d946ef;
+}
+
+.clear-button {
+    background-color: #ef4444; /* red */
+    color: white;
+    grid-column: span 2 / span 2;
+}
+
+.clear-button:hover {
+    background-color: #dc2626;
+}
+
+.clear-button:focus {
+    box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #ef4444;
+}
+
+.number-button {
+    background-color: #2d2d2d; /* dark gray */
+    color: #ffffff;
+}
+
+.number-button:hover {
+    background-color: #3f3f3f;
+}
+
+.number-button:focus {
+    box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #3f3f3f;
+}
+
+.equals-button.row-span-2 {
+    grid-row: span 2 / span 2;
+}
+
+</style>
+<body>
+  <div class="calculator-container">
+    <h1>Calculator</h1>
+    <div class="mb-6">
+      <input type="text" id="display" value="0" readonly />
+    </div>
+    <div class="grid grid-cols-4 gap-3">
+      <button class="calculator-button clear-button" onclick="clearDisplay()">AC</button>
+      <button class="calculator-button operator-button" onclick="appendOperator('/')">÷</button>
+      <button class="calculator-button operator-button" onclick="appendOperator('*')">×</button>
+
+      <button class="calculator-button number-button" onclick="appendNumber('7')">7</button>
+      <button class="calculator-button number-button" onclick="appendNumber('8')">8</button>
+      <button class="calculator-button number-button" onclick="appendNumber('9')">9</button>
+      <button class="calculator-button operator-button" onclick="appendOperator('-')">−</button>
+
+      <button class="calculator-button number-button" onclick="appendNumber('4')">4</button>
+      <button class="calculator-button number-button" onclick="appendNumber('5')">5</button>
+      <button class="calculator-button number-button" onclick="appendNumber('6')">6</button>
+      <button class="calculator-button operator-button" onclick="appendOperator('+')">+</button>
+
+      <button class="calculator-button number-button" onclick="appendNumber('1')">1</button>
+      <button class="calculator-button number-button" onclick="appendNumber('2')">2</button>
+      <button class="calculator-button number-button" onclick="appendNumber('3')">3</button>
+      <button class="calculator-button equals-button row-span-2" onclick="calculateResult()">=</button>
+
+      <button class="calculator-button number-button" onclick="appendNumber('0')">0</button>
+      <button class="calculator-button number-button" onclick="appendNumber('.')">.</button>
+      <button class="calculator-button number-button" onclick="appendNumber('%')">%</button>
+    </div>
+  </div>
+</body>
+</html>
